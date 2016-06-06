@@ -21,6 +21,7 @@ function drawNet(){
 			smooth:{
 				enabled:false
 			},
+			physics:false
 		},
 		layout:{
 			hierarchical: false,
