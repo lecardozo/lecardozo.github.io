@@ -159,6 +159,7 @@ function prefAttNet(){
 			//nodes.update({id: newnode, label: newnode.toString(), edgenum: 0 , value: 0, title: "Connections: " + auxj, color: "#99ffeb"});
 			if(testLink(nodes.get(i).edgenum) == 1){
 				if(links <= addedge){
+					links++;
 					edgeid++;
 					edges.add({from: newnode, to: i, id: edgeid});
 					G.addEdge(newnode,i);
