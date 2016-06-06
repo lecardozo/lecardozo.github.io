@@ -155,7 +155,7 @@ function prefAttNet(){
 		var newnode = nodenum + z;
 		nodes.add({id: newnode, label: newnode.toString(), edgenum: 0, value: 0, title: "Connections: " + 0, color: "#99ffeb"});
 		var links = 0;
-		for(var i=1; i <= nodenum+addnode; i++){
+		for(var i=1; i <= nodes.length; i++){
 			//nodes.update({id: newnode, label: newnode.toString(), edgenum: 0 , value: 0, title: "Connections: " + auxj, color: "#99ffeb"});
 			if(testLink(nodes.get(i).edgenum) == 1){
 				if(links < addedge){
