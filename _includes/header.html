@@ -11,8 +11,10 @@
         <div class="header-title"> Lucas Cardozo </div>
     </div>
 
-    <a><p class="site-title" href="{{ "/" | relative_url}}">{{ site.title | escape }}</p></a>
-    <a><p class="site-title" href="{{ "/about"}}">About me</p></a>
+    <div>
+        <a href="{{ "/" | relative_url}}"><p class="site-title" >{{ site.title | escape }}</p></a>
+        <a href="/about"><p class="site-title">About me</p></a>
+    </div>
 
     
 </header>
