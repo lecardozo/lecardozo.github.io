@@ -4,16 +4,56 @@
 /**
  * Site header
  */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 .site-header {
   background-color: #ffae00;
-  min-height: 200px;
-
+  min-height: 70px;
   // Positioning context for the mobile navigation icon
   position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.myinfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.avatar {
+    background-image: url('https://avatars0.githubusercontent.com/u/8867239?v=3&s=460');
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.links a {
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    &:hover {
+        color: grey;
+        cursor: pointer;
+    }
+}
+.header-title {
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 3px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .site-title {
-  font-size: 26px;
+  font-size: 35px;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   line-height: 56px;
   letter-spacing: -1px;
@@ -194,7 +234,7 @@
 
   > .post {
     position: relative;
-    height: 200px;
+    height: 120px;
     width: 100%;
     max-width: 200px; 
     background-color: lightgrey;
