@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+  
+  {{ content }}
+
+  <div class="postlist">
+    {% for post in site.posts %}
+    <div class="post" onclick="location.href='{{ post.url | relative_url }}'">
+        <div class='backpostimg' style="background-image:url('{{site.baseurl}}/assets/{{post.image }}');" ></div>
+        <div class='postinfo'>
+            <div class='text'>
+                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+                <h2>
+                {{ post.title | escape }}
+                </h2>
+            </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>

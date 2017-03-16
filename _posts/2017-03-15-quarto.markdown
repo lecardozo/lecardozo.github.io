@@ -1,0 +1,7 @@
+---
+layout: post
+title:  "Quarto Post"
+image: teste.png
+date:   2017-03-15 22:53:27 -0300
+---
+Esse é o post teste que está sendo utilizado para explorar o **jekyll**.
