@@ -1,0 +1,81 @@
+---
+layout: post
+title:  "O que é AdaBoost?"
+date:   2017-06-21 00:44:00
+---
+
+### Background
+
+ Os diferentes métodos do aprendizado de máquina são subdivididos entre três principais classes: métodos de aprendizado supervisionado, não supervisionado e aprendizado por reforço. Os métodos identificados como supervisionados são assim chamados pois a construção dos modelos (fase de treinamento) é realizada a partir de observações reais. Árvores de decisão, *support vector machines* e *k*-vizinhos mais próximos são alguns exemplos dessas técnicas.
+ Uma tarefa difícil dentro do aprendizado supervisionado é gerar modelos altamente acurados. Em diversos casos de classificação, por exemplo, a disposição das classes das observações no espaço de features não é tão claro e a construção de modelos com alta acurácia se torna complexa ou até mesmo impossível dependendo do algoritmo utilizado. Entretanto, muitas vezes, criar modelos extremamente simples que são levemente melhores do que a classificação ao acaso, é uma tarefa simples. Por exemplo, imagine um modelo que classifica textos como sendo referentes a esportes ou outros assuntos. Criar uma regra geral capaz de classificar precisamente um texto com a *tag* esportes é difícil, dada a grande variação existente entre textos relacionados a esse tema. No entanto, uma regra simples como *“Classifique como __esportes__ se o texto apresenta a palavra ‘futebol’ ”*, apesar de ser pouco acurada - muitos textos com a palavra *“futebol”* não são de esportes e muitos textos de esportes não possuem a palavra *“futebol”* -, ela ainda é melhor do que uma classificação ao acaso.
+ Baseando-se em aspectos como os citados acima, em 1988, Michael Kearns e Leslie Valiant estabelecem, em linhas gerais, o seguinte questionamento: classificadores que são levemente mais acurados do que um classificador aleatório (*weak learners*)  podem ser utilizados para formar um classificador com alta acurácia (*strong learner*)? Através deste questionamento, surgiu a técnica conhecida como **_boosting_**. A intuição por trás desta técnica é, de certa forma, simples. Ela consiste em combinar diversas regras simples com baixa acurácia com o objetivo de criar um classificador com alta acurácia.
+ Desde de o surgimento do *boosting*, diversos algoritmos já foram desenvolvidos para aplicar esta técnicas em problemas reais de aprendizado. Um dos algoritmos mais utilizados é o **_AdaBoost_** (*Adaptive Boosting*). Neste tutorial, iremos nos aprofundar um pouco neste algoritmo.
+  
+   
+## *AdaBoost*
+    
+O algoritmo de *Adaptive Boosting* foi introduzido em 1995 por *Freund* e *Schapire*, dois pesquisadores da *AT&T labs*. De acordo com os autores, este algoritmo resolveu diversos desafios enfrentados pelos algoritmos iniciais de boosting. A ideia geral por trás deste algoritmo é gerar um classificador forte que é resultado de uma combinação ponderada de classificadores fracos. Inicialmente, um peso equivalente é atribuído para cada amostra do conjunto de treinamento. A cada iteração, um novo classificador fraco é criado e o peso das amostras é atualizado. As amostras que foram erroneamente classificadas recebem um peso maior que as amostras que foram corretamente classificadas. Essa diferente atribuição de pesos a cada iteração faz com que os classificadores fracos dêem um maior foco às observações de mais difícil classificação. O algoritmo pode ser observado no pseudocódigo abaixo.
+     
+    T = numero de iteracoes
+    N = numero de observacoes
+    X = {x1 , x2, …, xn} # conjunto de treinamento
+    W = {w1 , w2, …, wn} # pesos das amostras
+    F = {} # vetor de classificadores fracos selecionados
+    ALFAS = {} # vetor de poder de votação para os classificadores
+    C = {c1 , c2, …, cy} # classificadores fracos
+     
+    para cada peso w em W : # inicializa o vetor de pesos
+        w = 1/N 
+         
+    para cada iteracao i no intervalo 1...T :
+        E = {} # vetor de erros
+        R = {} # vetor de vetores de classificação
+        para cada classificador fraco c em C:
+            r = classifique(c, X)
+            e = erro(r, X, W)
+            adicione e em E
+            adicione r em R
+            pos_mclass = índice(E[min(E)])
+            mclass = C[pos_mclass] # classif. com menor erro
+            W = atualiza_pesos(W, X, R[pos_mclass])
+            alfa = poder_votacao(E[pos_mclass])
+            adicione mclass em F
+            adicione alfa em ALFAS    
+                                  
+    Retorna: H(x) = sinal(ALPHA[1] * F[1](x) + ... + ALPHA[t] * F[t](x)), para cada t em 1...T)
+                                                                                 
+                                                                                  
+A formalização matemática por trás desse algoritmo se dá por:
+\\[ H = \sum\limits_{t=1}^T \alpha_{t}F_{t}(x) \\]
+onde $$ H $$ é o classificador forte resultante do AdaBoost; $$ T $$ é o número de rodadas do algoritmo; $$ \alpha_{t} $$ o poder de votação na rodada $$ t $$; $$ F_{t} $$ é o classificador com menor erro obtido na rodada $$ t $$.
+
+A atualização dos pesos (_**atualiza_pesos**_ no pseudocódigo) das amostras a cada rodada é dada pela seguinte função:
+
+$$ w_{x}^{t+1}=\frac{w_{x}^t}{2} * \frac{1}{1-\epsilon} $$ se a classificação foi correta, e
+
+$$ w_{x}^{t+1}=\frac{w_{x}^t}{2} * \frac{1}{\epsilon} $$ se a classificação foi incorreta;
+  
+Por último, um peso (_**poder_votacao**_ no pseudocódigo) é atribuído para cada classificador fraco, com base na seguinte equação:
+\\[ \alpha^{t}=\frac{1}{2}*ln(\frac{1-\epsilon^{t}}{\epsilon^{t}}) \\]
+    
+A atualização dos pesos para cada amostra e a atribuição de um poder de votação para cada classificador são os passos essenciais para a construção de um bom classificador como uma combinação linear de classificadores mais fracos.
+     
+      
+### Variantes e Aplicações
+	
+No decorrer do tempo, diversas análises foram realizadas com o objetivo de avaliar a performance do *AdaBoost* em diferentes situações, o que revelou alguns pontos negativos no que se refere ao tempo de treinamento e sensibilidade à ruido. Sendo assim, algoritmos variantes do *AdaBoost* convencional foram desenvolvidos para contornar seus pontos fracos, como: *Gentle AdaBoost*, que propõe o cálculo do classificador fraco otimizando o erro mínimo quadrático; *Modest AdaBoost*, que surge para reduzir os erros de generalização do *Gentle AdaBoost*; *Parametrized AdaBoost*, seu algoritmo eleva a velocidade de treinamento do *AdaBoost* convencional; *Margin Pruning Boost*, que foca na redução dos efeitos do ruído no treinamento; *Penalized AdaBoost*, criado como uma extensão do *Margin Pruning Boost*.
+
+  Dada sua robustez e eficiência, o *AdaBoost* é um algoritmo muito utilizado em diversos domínios do aprendizado de máquina atual, com aplicações desde a área médica até em áreas como classificação de texto e análise de imagens, onde foi incorporado e utilizado pelo algoritmo conhecido como Viola-Jones para detecção de objetos em imagens.
+        
+         
+### Referências
+ 
+**Kearns, M.** _Thoughts on Hypothesis Boosting._ 1988
+  
+**Freund, Y., Schapire, R. E.** _A Short Introduction to Boosting._ 1999
+ 
+**Schapire, R. E.** _The Boosting Approach to Machine Learning An Overview._ 2001
+  
+**Wu, S., Nagahashi, H.** _Analysis of Generalization Ability for Different AdaBoost Variants Based on Classification and Regression Trees._ 2015
+   
+**Viola, P., Jones, M. J.** _Robust Real-Time Face Detection._ 2003

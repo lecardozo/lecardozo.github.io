@@ -220,7 +220,7 @@ a.pages:hover {
 /**
  * Page content
  */
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
 @media (max-width: 710px) {
   .postlist {
     justify-content: center;
@@ -250,12 +250,13 @@ a.pages:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 
   > .post {
     position: relative;
     height: 120px;
     width: 100%;
-    max-width: 200px; 
+    max-width: 300px; 
     background-color: lightgrey;
     margin: 10px;
     
@@ -316,6 +317,7 @@ a.pages:hover {
   font-size: 42px;
   letter-spacing: -1px;
   line-height: 1;
+  font-family: 'Roboto', sans-serif;
 
   @include media-query($on-laptop) {
     font-size: 36px;
@@ -324,7 +326,9 @@ a.pages:hover {
 
 .post-content {
   margin-bottom: $spacing-unit;
-
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
   h2 {
     font-size: 32px;
 
