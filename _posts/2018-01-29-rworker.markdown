@@ -1,0 +1,152 @@
+---
+layout: post
+title:  "Another way to put R code into production"
+date:   2018-01-29 00:26:00
+---
+
+Every bioinformatician ~~should~~ know the importance of the R ecosystem for bioinformatics.
+Thanks to [Bioconductor](https://bioconductor.org), we have a huge list of packages
+focused on solving different kinds of bioinformatics problems. Even though these packages
+provide great documentation, biologists, physicists and biotechnologists that doesn't
+know the basics of R still depends on some bioinformatician to run their analysis.
+Considering this, at [CSBL](csbiology.com) we are starting to develop tools that make some of 
+these bioinformatics tasks more accessible for non-bioinformaticians.
+
+The first tool we've developed was [CEMiTool](http://cemitool.sysbio.tools). It is a web
+application (written in Python) that makes the discovery of gene co-expression modules less painful. Under the
+hood it is running R functions provided by the 
+[CEMiTool package](https://bioconductor.org/packages/release/bioc/html/CEMiTool.html). Here I will
+describe some problems that I faced when developing this application. If you ever needed to
+deploy R code to production, this post may be helpful to you!
+
+### *The problem*
+
+The CEMiTool package main function takes at least one minute to finish its execution (time depends 
+on the size of the input matrix). Although one minute seems a short time for a bioinformatics
+analysis to finish, it is an eternity for a web application. I'll try to illustrate why this
+is a problem. Imagine the following steps:
+
+1. *User request analysis to Python web application*
+2. *Python web application receives request*
+3. *Python web application runs R function*
+4. *Python web application send response back to the user*
+
+If you are running your application in a single process and the step 3 is synchronous,
+the website would hang until the step 3 finishes. If the user analysis takes one minute,
+your website would hang for one minute before responding the next requests. This is a terrible
+experience for the user. 
+
+One solution for this problem is decoupling the request-response
+execution flow from the analysis execution by turning the step 3 into an asynchronous task.
+
+### *Celery for the rescue!*
+
+Celery is a Python package for asynchronous task execution. It works by sending task execution
+requests (through some message broker) to worker processes that run in parallel. If
+we adapt our previous example to use Celery it would turn to something like this:
+
+1. *User request analysis to Python web application*
+2. *Python web application receives request*
+3. *Python web application asks __Celery worker__ to run analysis*
+4. *Python web application send response __immediatelly__ back to the user*
+
+Now, every time a user sends an analysis request, the application server responds immediatelly while
+the analysis is being executed asynchronously by the Celery worker.
+
+Alright! Everything looks just fine. The only problem is that our analysis functions are written in R
+while Celery is written in Python. How can we deal with this situation?
+Here I'll present two solutions for this. 
+
+#### Solution 1 - Subprocess module
+The `celery worker` process only understands tasks written in Python. 
+The only way to run an R function triggered by Celery is to write a Python task that uses 
+the `subprocess` module to create a R process that executes our analysis. Even though this
+approach worked, it was not ideal. I'll list some of the reasons that made me think
+twice before putting this solution into production.
+
+The first one has to do with Docker. In our use case, the `web application` and the `celery worker` 
+processes are kept in independent containers. This allows us to scale the different services
+independently, which is great for us. However, with this solution, we had to create a `celery worker`
+image with both Python and R installed, together with all systems dependencies
+needed by both languages, which made the Docker image much heavier than it should be.
+
+The second reason has to do with task progress monitoring. When you declare a Celery task in
+Python using the `bind=True` parameter, you can update the progress by calling `self.update_state`.
+However, when the task you need to monitor is running on a subprocess, how can you access its progress?
+The only way to achieve this is by parsing its STDOUT and STDERR and infering the progress by the output generated
+by the subprocess. In other words, you R function **necessarily** needs to print hints about its
+progress to STDOUT for you to monitor.
+
+#### Solution 2 - Celery worker for R
+The discontent with the first solution led me to create the **Rworker** package. 
+This package allows you to declare you own R tasks that will be directly executed 
+without an intermediate Python process. I will explain a little bit about how to use it
+and how it overcomes the weaknesses of the first solution.
+
+### *Rworker*
+With Rworker, you can easily define your R tasks. You just
+need to provide to the `rworker` function:
+ - `queue` = *message broker url*
+ - `qname` = what is the *queue name*
+ - `workers` = the *number of worker processes*
+ - `backend` = where to store task execution *state*
+
+```r
+library(rworker)
+library(magrittr)
+
+# Broker url
+redis_url <- 'redis://localhost:6379'
+
+# Instantiate Rworker object
+consumer <- rworker(qname='celery', workers=2,
+                    queue=redis_url, backend=redis_url)
+```
+After creating the consumer object, you can now register your tasks and
+starting listening to new messages sent from Celery.
+```r
+# Register tasks
+(function(){
+    Sys.sleep(5)
+}) %>% consumer$task(name='long_running_task')
+
+# Start consuming messages
+consumer$consume()
+```
+Not that hard, write? You can now trigger this R task from Python:
+
+```python
+from celery import Celery
+
+redis_url = "redis://localhost:6379/0"
+
+worker = Celery('app', broker=redis_url, backend=redis_url)
+worker.send_task('long_running_task')
+```
+
+Now that you know how Rworker works, let's understand how it overcomes
+those weaknesses. 
+
+The *Docker image size* problem is reduced because now we can create 
+a `celery worker` image only with R installed in it.
+
+The *progress monitoring* problem is was also solved. The Rworker package
+implements a "magical function" called `task_progress`. This function can
+be called from inside the task definition. Every time this function is
+called, the task progress is updated.
+```r
+# Register tasks
+(function(){
+    task_progress("Starting task")
+    Sys.sleep(5)
+    task_progress("50%")
+    Sys.sleep(5)
+    task_progress("Finished task")
+}) %>% consumer$task(name='task_with_progress')
+```
+There is no need for your task to print stuff into the STDOUT for progress monitoring. 
+The task progress is defined together with the task.
+
+#### *Collaborate!*
+The Rworker package is still in early development but it is already helping us getting
+the R code into production. If you want to collaborate, check the code [here](https://github.com/lecardozo/rworker).
