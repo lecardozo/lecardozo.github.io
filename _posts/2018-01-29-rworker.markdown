@@ -149,4 +149,6 @@ The task progress is defined together with the task.
 
 #### *Collaborate!*
 The Rworker package is still in early development but it is already helping us getting
-the R code into production. If you want to collaborate, check the code [here](https://github.com/lecardozo/rworker).
+the R code into production. For now, it only supports Redis as message broker and
+results backend. If you want to add support for another broker/backend, [here](https://github.com/lecardozo/rworker)
+is the Github repo. :)
