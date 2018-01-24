@@ -79,7 +79,7 @@ progress to STDOUT for you to monitor.
 
 #### Solution 2 - Celery worker for R
 The discontent with the first solution led me to create the **Rworker** package. 
-This package allows you to declare you own R tasks that will be directly executed 
+This package allows you to declare your own R tasks that will be directly executed 
 without an intermediate Python process. I will explain a little bit about how to use it
 and how it overcomes the weaknesses of the first solution.
 
@@ -113,7 +113,7 @@ starting listening to new messages sent from Celery.
 # Start consuming messages
 consumer$consume()
 ```
-Not that hard, write? You can now trigger this R task from Python:
+Not that hard, right? You can now trigger this R task from Python:
 
 ```python
 from celery import Celery
