@@ -2,6 +2,7 @@
 layout: post
 title:  "Another way to put R code into production"
 date:   2018-01-29 00:26:00
+tag: R
 ---
 
 Every bioinformatician ~~should~~ know the importance of the R ecosystem for bioinformatics.
