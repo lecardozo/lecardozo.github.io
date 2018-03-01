@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Another way to put R code into production"
-date:   2018-01-29 00:26:00
+date:   2018-01-30 00:26:00
 tag: R
 ---
 
@@ -104,7 +104,7 @@ consumer <- rworker(qname='celery', workers=2,
                     queue=redis_url, backend=redis_url)
 ```
 After creating the consumer object, you can now register your tasks and
-starting listening to new messages sent from Celery.
+start listening to new messages sent from Celery.
 ```r
 # Register tasks
 (function(){
@@ -131,7 +131,7 @@ those weaknesses.
 The *Docker image size* problem is reduced because now we can create 
 a `celery worker` image only with R installed in it.
 
-The *progress monitoring* problem is was also solved. The Rworker package
+The *progress monitoring* problem is also solved. The Rworker package
 implements a "magical function" called `task_progress`. This function can
 be called from inside the task definition. Every time this function is
 called, the task progress is updated.
