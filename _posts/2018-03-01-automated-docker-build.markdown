@@ -5,11 +5,11 @@ date:   2018-03-01
 tag: R
 ---
 
-The default support for R packages in Travis CI consists in basically three steps.
+The default pipeline for R package builds in Travis CI consists in basically three steps.
 First, your package repository is cloned into the working directory in Travis's VM/container.
 All package dependencies are first installed and finally the package can be built and checked.
-If no errors were raised during this steps, your build is considered successful! Here is
-an example of the default `.travis.yml` steps for R packages.
+If no errors were raised during these steps, your build is considered successful! Here is
+an example of the default `.travis.yml` for R packages.
 
 {% highlight yaml linenos %}
 install:
@@ -23,7 +23,7 @@ script:
 
 Pretty easy, huh? Now, imagine that your package is so cool and so full of features that
 it deserves its own Docker image. How could we automate the Docker image build with Travis?
-Considering you have a Dockerfile in the root of the package directory similar
+Considering you have a Dockerfile in the root directory of your package similar
 to this:
 
 {% highlight dockerfile linenos %}
@@ -60,15 +60,15 @@ after_success:
 
 The new `after_success` block has an intuitive name. Those docker commands inside this block will
 only run if the build and check steps are **successful**. We don't want to publish
-a Docker image with the broken code, right?
+a Docker image with broken code, right?
 
 This approach would work pretty well for packages with few dependencies, but would be a bad choice
 for packages with lots of dependencies. And why is that? 
 
 ![Alt Text](https://media.giphy.com/media/s239QJIh56sRW/giphy.gif){: .center-image}
 
-If you understood everything until now you probably noticed we are installing the package dependencies **twice**: 
-one inside the VM for the check and build steps and another during the Docker image build. Well, we need optimize
+If you understood everything until now you probably noticed that we are installing the package dependencies **twice**: 
+once inside the VM for the check and build steps and another during the Docker image build. Well, we should optimize
 this! To achieve this we'll need two Dockerfiles: one for an intermediate image and one for the final package
 image that will be published to Docker Hub. Let's name the former `Dockerfile.build` and the latter `Dockerfile`.
 
@@ -91,7 +91,7 @@ WORKDIR /yourpackage
 RUN Rscript -e "install.packages('devtools'); devtools::install_deps(dep=T)"
 {% endhighlight %}
 
-So, instead of installing the dependencies inside the Travis VM, we add them
+So, instead of installing the dependencies inside the Travis VM, we add them directly
 to the intermediate docker image, that we will tag as **:builder**. The `install` and
 `script` steps will now run with Docker commands.
 
