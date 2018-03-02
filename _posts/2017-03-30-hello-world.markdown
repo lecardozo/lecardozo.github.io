@@ -4,11 +4,13 @@ title:  "O clássico: Hello World!"
 date:   2017-03-30 00:26:00
 ---
 
-Primeiríssimo post desse belo blog!
+The very first post of this blog!
 
 {% highlight python %}
-Ola Mundo
+print("Hello World!")
 {% endhighlight %}
 
-Aqui eu pretendo escrever um pouco de cada coisa que faz parte do dia-a-dia. Desde como eu uso Python, R, Javascript pra brincar com meus dados até como uso o Docker no lab pra facilitar a minha vida. Eventualmente farei posts sobre coisas novas que estou aprendendo, tanto pra guardar como um histórico de problemas/soluções que encontrei, quanto pra deixar como referência para os que irão passar pelos mesmos problemas. Não se enganem, sempre há espaço para as maiores groselhas e possíveis discussões filosóficas! 
-
+Here I'll be writing a little bit about things that are part of my daily life at lab.
+Eventually, I'll write posts about problems that I've faced and solutions that I've found.
+May this be a reference for "Lucas from the future" so he does not spent too much
+time solving problems that "Lucas from the past" already solved.
