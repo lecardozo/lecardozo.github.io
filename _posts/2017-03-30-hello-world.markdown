@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "O clássico: Hello World!"
+title:  "Hello World!"
 date:   2017-03-30 00:26:00
 ---
 
