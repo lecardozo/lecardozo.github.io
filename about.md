@@ -11,7 +11,7 @@ I'm currently working on my Masters project at [Computational Systems Biology La
 
 #### R Packages
  - [`rworker`](https://github.com/lecardozo/rworker): Celery worker for R tasks!
- - [`CEMiTool`](https://bioconductor.org/packages/release/bioc/html/CEMiTool.html).
+ - [`CEMiTool`](https://bioconductor.org/packages/release/bioc/html/CEMiTool.html) Gene co-expression analyses made easy.
 
 #### Python packages
  - [`bioboard`](https://github.com/lecardozo/bioboard): Interactive dashboard for bioinformaticians.
