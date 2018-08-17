@@ -9,7 +9,23 @@ Started studying Python and R for bioinformatics in 2014. Since then, I've playe
 
 I'm currently working on my Masters project at [Computational Systems Biology Laboratory](http://csbiology.com) at University of São Paulo.
 
+#### R Packages
+ - [`rworker`](https://github.com/lecardozo/rworker): Celery worker for R tasks!
+ - [`CEMiTool`](https://bioconductor.org/packages/release/bioc/html/CEMiTool.html).
+
+#### Python packages
+ - [`bioboard`](https://github.com/lecardozo/bioboard): Interactive dashboard for bioinformaticians.
+ - [`spots`](https://github.com/lecardozo/spots): Read and analyse Google location history.
+
+#### Web
+ - [SiPoS](https://sipos.fcf.usp.br)
+ - [webCEMiTool](https://cemitool.sysbio.tools)
+
+
+#### Miscelaneous
+
 For those who believe that *"you are what you listen to"*, here goes my list of favourite podcasts:
+
  - [Partially Derivative](http://partiallyderivative.com/)
  - [Linear Digressions](http://lineardigressions.com/)
  - [Not So Standard Deviations](http://lineardigressions.com/)
@@ -18,6 +34,7 @@ For those who believe that *"you are what you listen to"*, here goes my list of 
  - [Late Nights with Trav and Los](http://www.travandlos.com/)
 
 If you believe *"you are what you read"*, here is a list of the aggregators that I commonly use:
+
  - [R-bloggers](https://www.r-bloggers.com/)
  - [stackshare](https://stackshare.io/)
 
