@@ -21,6 +21,10 @@ I'm currently working on my Masters project at [Computational Systems Biology La
  - [SiPoS](https://sipos.fcf.usp.br)
  - [webCEMiTool](https://cemitool.sysbio.tools)
 
+#### Publications
+ - SILVA, MARIA C. ; DAVOLI-FERREIRA, MARCELA ; MEDINA, TIAGO S. ; SESTI-COSTA, RENATA ; SILVA, GRACE K. ; LOPES, CARLA D. ; _**CARDOZO, LUCAS E.**_ ; GAVA, FÁBIO N. ; LYRONI, KONSTANTINA ; DIAS, FABRÍCIO C. ; FRADE, AMANDA F. ; BARON, MONIQUE ; NAKAYA, HELDER I. ; FIGUEIREDO, FLORÊNCIO ; ALVES-FILHO, JOSÉ C. ; CUNHA, FERNANDO Q. ; TSATSANIS, CHRISTOS ; CHEVILLARD, CHRISTOPHE ; CUNHA-NETO, EDECIO ; HIRSCH, EMILIO ; SILVA, JOÃO S. ; CUNHA, THIAGO M. . Canonical PI3Kγ signaling in myeloid cells restricts Trypanosoma cruzi infection and dampens chagasic myocarditis. _Nature Communications_, v. 9, p. 1513, 2018.
+ - RUSSO, PEDRO S. T. ; FERREIRA, GUSTAVO R. ; _**CARDOZO, LUCAS E.**_ ; BÜRGER, MATHEUS C. ; ARIAS-CARRASCO, RAUL ; MARUYAMA, SANDRA R. ; HIRATA, THIAGO D. C. ; LIMA, DIÓGENES S. ; PASSOS, FERNANDO M. ; FUKUTANI, KIYOSHI F. ; LEVER, MELISSA ; SILVA, JOÃO S. ; MARACAJA-COUTINHO, VINICIUS ; NAKAYA, HELDER I. . CEMiTool: a Bioconductor package for performing comprehensive modular co-expression analyses. _BMC Bioinformatics_, v. 19, p. 1-56, 2018.
+ - DE OLIVEIRA, ÉRICA APARECIDA ; DE LIMA, DIOGENES SAULO ; _**CARDOZO, LUCAS ESTEVES**_ ; DE SOUZA, GARCIA FERREIRA ; DE SOUZA, NAYANE ; ALVES-FERNANDES, DEBORA KRISTINA ; FAIÃO-FLORES, FERNANDA ; PABLO QUINCOCES, JOSÉ AGUSTÍN ; DE MORAES BARROS, SILVIA BERLANGA ; NAKAYA, HELDER I. ; MONTEIRO, GISELE ; MARIA-ENGLER, SILVYA STUCHI . Toxicogenomic and bioinformatics platforms to identify key molecular mechanisms of a curcumin-analogue DM-1 toxicity in melanoma cells. _Pharmacological Research_, p. 178-187, 2017.
 
 #### Miscelaneous
 
