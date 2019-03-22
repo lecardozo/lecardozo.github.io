@@ -28,6 +28,7 @@ ASSET_PATH: /assets/
 markdown: kramdown
 gems:
   - jekyll-feed
+  - jemoji
 exclude:
   - Gemfile
   - Gemfile.lock
