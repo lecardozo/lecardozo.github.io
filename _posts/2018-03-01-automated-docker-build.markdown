@@ -3,6 +3,7 @@ layout: post
 title:  "Faster Docker builds in Travis CI for R packages"
 date:   2018-03-01
 tag: R
+comments: true
 ---
 
 The default pipeline for R package builds in Travis CI consists in basically three steps.

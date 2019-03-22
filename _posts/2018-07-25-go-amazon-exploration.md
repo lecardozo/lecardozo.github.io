@@ -2,6 +2,7 @@
 layout: post
 title:  "Let's GO(explore)Amazon!"
 date:   2018-07-25 20:23
+comments: true
 ---
 
 Back in 2016, me and [Diogenes](https://twitter.com/diogenes_lim) were given the task

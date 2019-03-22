@@ -2,6 +2,7 @@
 layout: post
 title:  "Hello World!"
 date:   2017-03-30 00:26:00
+comments: true
 ---
 
 The very first post of this blog!
