@@ -39,19 +39,19 @@ we had the following variables:
 
 
 ### Exploratory Data Analysis
-One main tools in the exploratory data analysis toolbelt is the data visualization. Visually looking for general trends, outliers and
+One of the main tools in the exploratory data analysis toolbelt is the data visualization. Visually looking for general trends, outliers and
 relationships between different variables is an essential task before asking any questions or formulating hypothesis. 
 
 #### - *Take a look at your distributions!*
-So after some data aggregations, filtering and reshaping (you know, pre-processing stuff that is essential but generallly omitted) we finally can
-start visualizing! The almost always first choice for having a general idea about continuous variables is plotting its distributions.
+After some data aggregations, filtering and reshaping (you know, pre-processing stuff that is essential but generallly omitted) we finally can
+start visualizing it! The almost always first choice for having a general idea about continuous variables is plotting their distributions.
 
 <figure>
    <img alt="Variables distribution" src="/assets/goamazon/distribution.png">
    <figcaption><i>Distribution of each variable from January of 2014 to December of 2015.</i></figcaption>
 </figure>
 
-This kind of visualization brings us some useful information. We can now see what are lower and upper bounds for each 
+This kind of visualization brings us some useful information. We can now see what are the lower and upper bounds for each 
 variable (this is good, specially if you are not familiar with these variables). We can also verify if the distributions
 are similar to those most known distributions (does it looks like a Gaussian? Poisson?). Last but not least, we can have
 a general idea about the existence of outlier records (I'm talking about you CO, H<sub>2</sub>O, N<sub>2</sub>O and Rain)
@@ -115,10 +115,10 @@ Now, let's get back to our potential outliers. :eyes:
 There is a quote from a famous philosopher that goes something link this:
 > Outliers. To remove or not to remove? - Bob Marley, 2014
 
-This is a question that always arise. In bioinformatics, experimental outliers, caused by, for instance,
+This is a question that always arises. In bioinformatics, experimental outliers caused by, for instance,
 sample contamination, different protocols or even uncalibrated devices, can
-completely affect your results. So, in general we exclude them because they can cause more harm then if we leave
-it there - unless its some hard to get data, which, in this case, we think twice before removing it.
+completely affect your results. Thus, in general, we exclude them because they can cause more harm then if we leave
+it there - unless its some hard-to-get data, which, in this case, we think twice before removing it.
 
 We decided to take a deeper look into our current outliers, to see if we can find some patterns in it. We selected
 the the carbon monoxide (CO) variable as our first candidate. In order to find some year trend in the outlier appearance,
@@ -129,14 +129,14 @@ we grouped the data by year and month and plotted it. Here is the result:
 </figure>
 
 Interesting, right?! Apparently the potential outliers only occur between August and October of both years.
-This visualization led us to think that thos outlier observations were problably not being caused by sensor
+This visualization led us to think that those outlier observations were problably not being caused by sensor
 failures. What the heck is causing those discrepant observations? Time to create some hypothesis, friends!
 
 
 #### - *Hypothesis time!*
 If you have a good memory, you remember that all this data was collected in the surroundings of Manaus,
-specifically in a small city, Manacapuru, located southwestern to Manaus. In the following map you can
-see Manacapuru right in the center.
+specifically in a small city, Manacapuru, located southwestern to Manaus. In the following figure you can
+see Manacapuru right in the center of the map.
 
 
 <figure style="text-align:center">
@@ -207,19 +207,19 @@ random, we can't establish a causal relationship between them and the increase i
 monoxide (we would need some crazy experiment for that). After some more discussion
 with my sister, we ended with two new hypothesis to explain what we were seeing.
 
-- *Antropogenic process:* farmers using fire as a "cleaning" method for preparing their 
+- *Antropogenic process:* farmers using fire as a "cleaning" method to prepare their 
 fields for the next crop (which is a terrible thing to do, but still pretty common).
 - *Natural process:* this period of the year is the drought season in that region, which may
 favour the occurence of natural fire. According to some authors [2], 2015 was the most extreme
 of the 21st century, with respect to droughts.
 
-Both presented hypothesis might be right (or wrong). There are several great scientists working
-on understanding and describing processes and how they impact on things such as the global warming
+Both hypothesis might be right (or wrong). There is a bunch of great scientists working
+on understanding and describing these processes and how they impact on things such as the global warming
 . If your interested on these topics, check out [2-4]
 
 
 ### Conclusions
-This whole work was a great experience. I've learned a lot about a scientific domain that I've never
+This whole work was a great experience. I've learned a lot about a scientific domain that I'd never
 worked with before. It also was important because it showed us that we cannot (and you also shoundn't)
 underestimate the power of **data visualization** and, more importantly, **domain knowledge**.
 As a data scientist your job is to understand the data you are dealing with. If you are not familiar
