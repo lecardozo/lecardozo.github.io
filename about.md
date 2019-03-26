@@ -9,10 +9,11 @@ Started studying Python and R for bioinformatics in 2014. Since then, I've playe
 
 #### R Packages
  - [`rworker`](https://github.com/lecardozo/rworker): Celery worker for R tasks!
+ - [`rabbitr`](https://github.com/lecardozo/rabbitr): RabbitMQ client library for R.
  - [`CEMiTool`](https://bioconductor.org/packages/release/bioc/html/CEMiTool.html) Gene co-expression analyses made easy.
 
 #### Python packages
- - [`bioboard`](https://github.com/lecardozo/bioboard): Interactive dashboard for bioinformaticians.
+ - [`bioboard`](http://b.ioboard.org): Interactive dashboard for bioinformaticians.
  - [`spots`](https://github.com/lecardozo/spots): Read and analyse Google location history.
 
 #### Web
