@@ -24,6 +24,8 @@ Started studying Python and R for bioinformatics in 2014. Since then, I've playe
 
 #### Presentations
  - [Docker for bioinformaticians](/assets/pdf/docker-for-bioinformaticians.pdf)
+ - [Multi-armed bandits](/assets/pdf/mab.pdf)
+ - [You Only Train Once (YOTO)](/assets/pdf/yoto.pdf)
 
 #### Publications
  - _**CARDOZO, LUCAS E.**_; RUSSO, PEDRO S. T.; GOMES-CORREIA, BRUNO; ARAUJO-PEREIRA, MARIANA; SEPÚLVEDA-HERMOSILLA, GONZALO; MARACAJA-COUTINHO, VINICIUS; 
