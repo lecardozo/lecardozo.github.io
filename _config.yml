@@ -26,6 +26,7 @@ ASSET_PATH: /assets/
 
 # Build settings
 markdown: kramdown
+mathjax: true
 gems:
   - jekyll-feed
   - jemoji
