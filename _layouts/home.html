@@ -11,7 +11,6 @@ layout: default
   <div class="postlist">
     {% for post in site.posts %}
     <div class="post" onclick="location.href='{{ post.url | relative_url }}'">
-        <div class='backpostimg' style="background-image:url('{{site.baseurl}}/assets/{{post.image }}');" ></div>
         <div class='postinfo'>
             <div class='text'>
                 <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>

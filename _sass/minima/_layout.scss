@@ -259,10 +259,8 @@ a.pages:hover {
 
   > .post {
     position: relative;
-    height: 120px;
     width: 100%;
-    //max-width: 300px; 
-    background-color: lightgrey;
+    background-color: transparent;
     margin: 10px;
     
     > .backpostimg {
@@ -279,15 +277,12 @@ a.pages:hover {
     > .postinfo {
         height: 100%;
         width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        color: white;
+        color: black;
         font-weight: bold;
         font-family: 'Roboto', sans-serif;
         &:hover {
             cursor: pointer;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.05);
         }
         > .text {
             padding: 10px;
